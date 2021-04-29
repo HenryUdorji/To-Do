@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/_250sdp"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:elevation="@dimen/_20sdp"
+    android:padding="@dimen/_10sdp"
+    android:background="@drawable/prompt_dialog_bg">
+
+    <TextView
+        android:id="@+id/message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Please setup up your profile for a more personalized UI"
+        android:textAlignment="center"
+        android:fontFamily="@font/raleway_regular"
+        android:textSize="@dimen/_15ssp"
+        android:layout_margin="@dimen/_5sdp"
+        android:textColor="@color/dark_gray"/>
+
+    <Button
+        android:id="@+id/continue_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginStart="@dimen/_20sdp"
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:backgroundTint="@color/colorDarkMode"
+        android:fontFamily="@font/raleway_regular"
+        android:text="Continue"
+        android:textAllCaps="false"
+        android:layout_below="@id/message"/>
+
+</RelativeLayout>

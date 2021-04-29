@@ -2,7 +2,17 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/bottom_nav_graph"
-    app:startDestination="@id/setupFragment">
+    app:startDestination="@id/homeFragment">
+
+    <action
+        android:id="@+id/action_to_profile_fragment"
+        app:destination="@+id/profileFragment"
+        app:enterAnim="@anim/slide_in_left"
+        app:exitAnim="@anim/slide_out_right"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right"
+        app:popUpTo="@id/profileFragment"
+        app:popUpToInclusive="true"/>
 
 
     <fragment
@@ -13,7 +23,16 @@
             android:id="@+id/action_homeFragment_to_addTodoFragment"
             app:destination="@id/addTodoFragment"
             app:enterAnim="@anim/slide_in_left"
-            app:exitAnim="@anim/slide_out_right" />
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_homeFragment_to_profileFragment"
+            app:destination="@id/profileFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/notificationFragment"
@@ -27,18 +46,20 @@
             android:id="@+id/action_addTodoFragment_to_homeFragment"
             app:destination="@id/homeFragment"
             app:enterAnim="@anim/slide_in_left"
-            app:exitAnim="@anim/slide_out_right" />
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
-        android:id="@+id/setupFragment"
-        android:name="com.henryudorji.todoapp.ui.fragments.SetupFragment"
-        android:label="SetupFragment" >
+        android:id="@+id/profileFragment"
+        android:name="com.henryudorji.todoapp.ui.fragments.ProfileFragment"
+        android:label="ProfileFragment" >
         <action
-            android:id="@+id/action_setupFragment_to_homeFragment"
+            android:id="@+id/action_profileFragment_to_homeFragment"
             app:destination="@id/homeFragment"
             app:enterAnim="@anim/slide_in_left"
             app:exitAnim="@anim/slide_out_right"
-            app:popUpTo="@id/setupFragment"
-            app:popUpToInclusive="true" />
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
 </navigation>

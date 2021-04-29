@@ -5,7 +5,6 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import com.henryudorji.todoapp.R
 import com.henryudorji.todoapp.databinding.FragmentAddTodoBinding
-import com.henryudorji.todoapp.databinding.FragmentSetupBinding
 
 //
 // Created by hash on 4/23/2021.

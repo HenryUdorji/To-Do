@@ -1,4 +1,4 @@
-package com.henryudorji.todoapp
+package com.henryudorji.todoapp.base
 
 import android.app.Application
 import android.content.SharedPreferences
