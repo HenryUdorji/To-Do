@@ -31,14 +31,14 @@
         app:layout_constraintEnd_toEndOf="parent"/>
 
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/addImage"
         android:layout_width="@dimen/_20sdp"
         android:layout_height="@dimen/_20sdp"
         android:layout_marginStart="@dimen/_80sdp"
         android:layout_marginTop="@dimen/_70sdp"
-        android:background="@drawable/ic_add"
-        android:backgroundTint="@color/gold"
+        android:src="@drawable/ic_add"
+        android:background="@color/gold"
         app:layout_constraintStart_toStartOf="@+id/profileImage"
         app:layout_constraintTop_toTopOf="@+id/profileImage" />
 
@@ -82,6 +82,7 @@
         android:layout_marginTop="@dimen/_20sdp"
         android:layout_marginEnd="@dimen/_20sdp"
         android:hint="Passcode"
+        app:passwordToggleEnabled="true"
         android:textColorHint="@color/colorSecondaryText"
         app:boxStrokeColor="@color/colorDarkMode"
         app:hintTextColor="@color/colorDarkMode"

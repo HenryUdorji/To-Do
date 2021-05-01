@@ -6,6 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="@dimen/_15sdp"
     app:cardElevation="@dimen/_10sdp"
+    app:cardBackgroundColor="@color/app_background_color"
     android:layout_marginTop="@dimen/_10sdp"
     android:layout_marginStart="@dimen/_10sdp"
     android:layout_marginEnd="@dimen/_10sdp">
@@ -36,5 +37,32 @@
             app:layout_constraintEnd_toEndOf="@id/indicator"
             app:layout_constraintStart_toStartOf="@id/indicator"
             app:layout_constraintBottom_toBottomOf="@id/indicator"/>
+
+        <ImageView
+            android:id="@+id/alarmIcon"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:src="@drawable/ic_alarm"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:tint="@color/dark_gray" />
+
+        <ImageView
+            android:id="@+id/imageIcon"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:src="@drawable/ic_image"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/alarmIcon"
+            app:tint="@color/dark_gray" />
+
+        <ImageView
+            android:id="@+id/audioIcon"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:src="@drawable/ic_finger_print"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/imageIcon"
+            app:tint="@color/dark_gray" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

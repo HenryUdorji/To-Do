@@ -12,6 +12,6 @@ data class Profile(
         @PrimaryKey
         var id: Int,
         val username: String,
-        val passcode: Int? = null,
+        val passcode: String? = null,
         val image: Bitmap? = null
 )

@@ -19,7 +19,9 @@ class TodoRepository(
     /**
      * User Profile
      */
-    suspend fun profileUpsert(profile: Profile) = db.getTodoDao().profileUpsert(profile)
+    suspend fun profileInsert(profile: Profile) = db.getTodoDao().profileInsert(profile)
+
+    suspend fun profileUpdate(profile: Profile) = db.getTodoDao().profileUpdate(profile)
 
     fun getProfile() = db.getTodoDao().getProfile()
 }

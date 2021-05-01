@@ -1,10 +1,7 @@
 package com.henryudorji.todoapp.ui
 
 import android.graphics.Bitmap
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.henryudorji.todoapp.data.TodoRepository
 import com.henryudorji.todoapp.data.model.Profile
 import com.henryudorji.todoapp.utils.Resource
@@ -25,18 +22,26 @@ class TodoViewModel(
     /**
      * Profile
      */
-    fun profileUpsert(profile: Profile) = viewModelScope.launch {
-        todoRepository.profileUpsert(profile)
+    private fun profileInsert(profile: Profile) = viewModelScope.launch {
+        todoRepository.profileInsert(profile)
+    }
+
+    private fun profileUpdate(profile: Profile) = viewModelScope.launch {
+        todoRepository.profileUpdate(profile)
     }
 
     fun getProfile() = todoRepository.getProfile()
 
-    fun validateUserInput(bitmap: Bitmap?, username: String, passcode: Int?) {
+    fun validateUserInput(bitmap: Bitmap?, username: String, passcode: String?) {
         if (username.isEmpty()) {
             _profileResponse.postValue(Resource.Error("Username should not be empty"))
         }else {
+            if (bitmap == null) {
+                profileInsert(Profile(1,username, passcode, bitmap))
+            }else {
+                profileInsert(Profile(1,username, passcode, bitmap))
+            }
             _profileResponse.postValue(Resource.Success("Profile setup successful"))
-            profileUpsert(Profile(1,username, passcode, bitmap))
         }
     }
 

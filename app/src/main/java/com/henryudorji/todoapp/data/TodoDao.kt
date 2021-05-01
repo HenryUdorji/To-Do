@@ -24,7 +24,10 @@ interface TodoDao {
      * User Profile
      */
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun profileUpsert(profile: Profile)
+    suspend fun profileInsert(profile: Profile)
+
+    @Update
+    suspend fun profileUpdate(profile: Profile)
 
     @Query("SELECT * FROM profile")
     fun getProfile(): LiveData<Profile>

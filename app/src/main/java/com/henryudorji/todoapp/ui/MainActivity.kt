@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import com.henryudorji.todoapp.R
@@ -11,11 +12,13 @@ import com.henryudorji.todoapp.data.TodoDatabase
 import com.henryudorji.todoapp.data.TodoRepository
 import com.henryudorji.todoapp.databinding.ActivityMainBinding
 import com.henryudorji.todoapp.utils.Constants.APP_HAS_LAUNCHED_BEFORE
+import com.henryudorji.todoapp.utils.Constants.PROFILE_SETUP_IS_DONE
 import com.henryudorji.todoapp.utils.getBooleanFromPref
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     lateinit var viewModel: TodoViewModel
+    lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,8 +33,16 @@ class MainActivity : AppCompatActivity() {
 
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
         val graph = navHostFragment.navController.navInflater.inflate(R.navigation.bottom_nav_graph)
+        navController = navHostFragment.navController
+
+
+        if (getBooleanFromPref(PROFILE_SETUP_IS_DONE)) {
+            graph.startDestination = R.id.homeFragment
+        }else {
+            graph.startDestination = R.id.profileFragment
+
+        }
         navHostFragment.navController.graph = graph
-        //val navController = navHostFragment.navController
 
 
 

@@ -9,17 +9,18 @@ import android.view.MenuItem
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.setupWithNavController
 import com.henryudorji.todoapp.R
 import com.henryudorji.todoapp.databinding.FragmentProfileBinding
 import com.henryudorji.todoapp.ui.MainActivity
 import com.henryudorji.todoapp.ui.TodoViewModel
+import com.henryudorji.todoapp.utils.*
+import com.henryudorji.todoapp.utils.Constants.APP_HAS_LAUNCHED_BEFORE
 import com.henryudorji.todoapp.utils.Constants.IMAGE_REQUEST_CODE
+import com.henryudorji.todoapp.utils.Constants.PASS_CODE_IS_SET
 import com.henryudorji.todoapp.utils.Constants.PROFILE_SETUP_IS_DONE
-import com.henryudorji.todoapp.utils.Resource
-import com.henryudorji.todoapp.utils.loadImage
-import com.henryudorji.todoapp.utils.putBooleanInPref
-import com.henryudorji.todoapp.utils.showSnackBar
 
 //
 // Created by hash on 4/23/2021.
@@ -34,7 +35,6 @@ class ProfileFragment : Fragment(R.layout.fragment_profile){
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentProfileBinding.bind(view)
 
-
         viewModel = (activity as MainActivity).viewModel
 
         initViews()
@@ -45,6 +45,10 @@ class ProfileFragment : Fragment(R.layout.fragment_profile){
         (activity as MainActivity).supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_arrow_back);
         (activity as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true);
         (activity as MainActivity).supportActionBar?.setDisplayShowHomeEnabled(true);
+
+        binding.toolbar.setNavigationOnClickListener {
+            it.findNavController().navigateUp()
+        }
 
         viewModel.getProfile().observe(viewLifecycleOwner, Observer {
 
@@ -67,7 +71,18 @@ class ProfileFragment : Fragment(R.layout.fragment_profile){
 
         binding.updateBtn.setOnClickListener {
             val username = binding.username.text.toString()
-            val passcode = binding.passcode.text.toString().toInt()
+            val passcode = binding.passcode.text.toString()
+
+            //@todo onStart of application show security prompt to user
+            if (passcode.isNotEmpty()) {
+                context?.putBooleanInPref(PASS_CODE_IS_SET, true)
+            }else {
+                context?.putBooleanInPref(PASS_CODE_IS_SET, false)
+            }
+
+            if (bitmap == null) {
+                bitmap = BitmapFactory.decodeResource(resources, R.drawable.profile)
+            }
             viewModel.validateUserInput(bitmap, username, passcode)
 
 
@@ -105,13 +120,4 @@ class ProfileFragment : Fragment(R.layout.fragment_profile){
 
         }
     }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        val itemId = item.itemId
-        if (itemId == android.R.id.home) {
-            findNavController().navigate(R.id.action_profileFragment_to_homeFragment)
-        }
-        return super.onOptionsItemSelected(item)
-    }
-
 }

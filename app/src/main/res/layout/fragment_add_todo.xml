@@ -1,6 +1,332 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_background_color"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:title=""
+        android:background="@color/app_background_color"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scrollbars="none"
+        android:background="@color/app_background_color"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/app_background_color"
+            android:paddingBottom="@dimen/_10sdp">
+
+            <TextView
+                android:id="@+id/createTaskText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Create new task"
+                android:textSize="@dimen/_25ssp"
+                android:textColor="@color/dark_gray"
+                android:fontFamily="@font/raleway_bold"
+                android:textAlignment="center"
+                android:padding="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputTaskTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:hint="Task name"
+                app:boxBackgroundMode="filled"
+                app:boxBackgroundColor="@color/app_background_color"
+                app:boxStrokeColor="@color/dark_gray"
+                android:textColorHint="@color/colorSecondaryText"
+                app:hintTextColor="@color/colorDarkMode"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/createTaskText">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/dark_gray"
+                    android:fontFamily="@font/raleway_regular"
+                    android:textCursorDrawable="@drawable/cursor_bg"
+                    android:textSize="@dimen/_18ssp"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputTaskDesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:hint="Task description"
+                app:boxBackgroundMode="filled"
+                app:boxBackgroundColor="@color/app_background_color"
+                app:boxStrokeColor="@color/dark_gray"
+                android:textColorHint="@color/colorSecondaryText"
+                app:hintTextColor="@color/colorDarkMode"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textInputTaskTitle">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/dark_gray"
+                    android:fontFamily="@font/raleway_regular"
+                    android:textCursorDrawable="@drawable/cursor_bg"
+                    android:textSize="@dimen/_18ssp"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <ImageView
+                android:id="@+id/calenderImage"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_marginStart="@dimen/_40sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:src="@drawable/ic_calender"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textInputTaskDesc"
+                app:tint="@color/dark_gray" />
+
+            <TextView
+                android:id="@+id/dateText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/raleway_regular"
+                android:padding="@dimen/_5sdp"
+                android:text="Date"
+                android:textAlignment="center"
+                android:textColor="@color/dark_gray"
+                android:textSize="@dimen/_17ssp"
+                android:layout_marginStart="@dimen/_10sdp"
+                app:layout_constraintBottom_toBottomOf="@+id/calenderImage"
+                app:layout_constraintStart_toEndOf="@+id/calenderImage"
+                app:layout_constraintTop_toTopOf="@+id/calenderImage" />
+
+            <ImageView
+                android:id="@+id/alarmImage"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_marginStart="@dimen/_40sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:src="@drawable/ic_alarm"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/calenderImage"
+                app:tint="@color/dark_gray" />
+
+            <TextView
+                android:id="@+id/alarmText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/raleway_regular"
+                android:padding="@dimen/_5sdp"
+                android:text="Alarm"
+                android:textAlignment="center"
+                android:textColor="@color/dark_gray"
+                android:textSize="@dimen/_17ssp"
+                android:layout_marginStart="@dimen/_10sdp"
+                app:layout_constraintBottom_toBottomOf="@+id/alarmImage"
+                app:layout_constraintStart_toEndOf="@+id/alarmImage"
+                app:layout_constraintTop_toTopOf="@+id/alarmImage" />
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/remindMeSwitch"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_marginStart="@dimen/_40sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/alarmImage"/>
+
+            <TextView
+                android:id="@+id/remindMeText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/raleway_regular"
+                android:padding="@dimen/_5sdp"
+                android:text="Remind me"
+                android:textAlignment="center"
+                android:textColor="@color/dark_gray"
+                android:textSize="@dimen/_17ssp"
+                android:layout_marginStart="@dimen/_10sdp"
+                app:layout_constraintBottom_toBottomOf="@+id/remindMeSwitch"
+                app:layout_constraintStart_toEndOf="@+id/remindMeSwitch"
+                app:layout_constraintTop_toTopOf="@+id/remindMeSwitch" />
+
+
+            <TextView
+                android:id="@+id/categoryText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/raleway_bold"
+                android:padding="@dimen/_5sdp"
+                android:text="Category"
+                android:textColor="@color/dark_gray"
+                android:textSize="@dimen/_17ssp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginStart="@dimen/_20sdp"
+                app:layout_constraintTop_toBottomOf="@id/lowBtn"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/workBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Work"
+                android:textAllCaps="false"
+                android:textColor="@color/dark_gray"
+                android:fontFamily="@font/raleway_regular"
+                android:padding="@dimen/_10sdp"
+                android:backgroundTint="@color/notify_6"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_20sdp"
+                app:layout_constraintTop_toBottomOf="@id/categoryText"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/familyBtn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Family"
+                android:textAllCaps="false"
+                android:fontFamily="@font/raleway_regular"
+                android:textColor="@color/dark_gray"
+                android:padding="@dimen/_10sdp"
+                android:backgroundTint="@color/notify_5"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                app:layout_constraintTop_toBottomOf="@id/categoryText"
+                app:layout_constraintStart_toEndOf="@id/workBtn"
+                app:layout_constraintEnd_toStartOf="@id/schoolBtn"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/schoolBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="School"
+                android:textAllCaps="false"
+                android:textColor="@color/dark_gray"
+                android:fontFamily="@font/raleway_regular"
+                android:backgroundTint="@color/notify_7"
+                android:padding="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                app:layout_constraintTop_toBottomOf="@id/categoryText"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+
+            <TextView
+                android:id="@+id/priorityText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/raleway_bold"
+                android:padding="@dimen/_5sdp"
+                android:text="Priority"
+                android:textColor="@color/dark_gray"
+                android:textSize="@dimen/_17ssp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginStart="@dimen/_20sdp"
+                app:layout_constraintTop_toBottomOf="@id/remindMeSwitch"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/lowBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Low"
+                android:textAllCaps="false"
+                android:textColor="@color/dark_gray"
+                android:fontFamily="@font/raleway_regular"
+                android:padding="@dimen/_10sdp"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                app:strokeColor="@color/notify_4"
+                app:strokeWidth="@dimen/_1sdp"
+                android:backgroundTint="@color/app_background_color"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_20sdp"
+                app:layout_constraintTop_toBottomOf="@id/priorityText"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/mediumBtn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Medium"
+                android:textAllCaps="false"
+                android:fontFamily="@font/raleway_regular"
+                android:textColor="@color/dark_gray"
+                android:padding="@dimen/_10sdp"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                app:strokeColor="@color/notify_6"
+                app:strokeWidth="@dimen/_1sdp"
+                android:backgroundTint="@color/app_background_color"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                app:layout_constraintTop_toBottomOf="@id/priorityText"
+                app:layout_constraintStart_toEndOf="@id/lowBtn"
+                app:layout_constraintEnd_toStartOf="@id/highBtn"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/highBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="High"
+                android:textAllCaps="false"
+                android:textColor="@color/dark_gray"
+                android:fontFamily="@font/raleway_regular"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                app:strokeColor="@color/notify_1"
+                app:strokeWidth="@dimen/_1sdp"
+                android:backgroundTint="@color/app_background_color"
+                android:padding="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                app:layout_constraintTop_toBottomOf="@id/priorityText"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/addTodoBtn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Add Todo"
+                android:textColor="@color/colorWhite"
+                android:textAllCaps="false"
+                android:fontFamily="@font/raleway_regular"
+                android:padding="@dimen/_10sdp"
+                android:backgroundTint="@color/colorDarkMode"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginStart="@dimen/_40sdp"
+                android:layout_marginEnd="@dimen/_40sdp"
+                app:layout_constraintTop_toBottomOf="@id/familyBtn"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
