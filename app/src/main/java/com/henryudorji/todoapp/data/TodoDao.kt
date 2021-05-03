@@ -11,8 +11,11 @@ import com.henryudorji.todoapp.data.model.Todo
 @Dao
 interface TodoDao {
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun upsert(todo: Todo)
+    @Insert
+    suspend fun todoInsert(todo: Todo)
+
+    @Update
+    suspend fun todoUpdate(todo: Todo)
 
     @Delete
     suspend fun deleteTodo(todo: Todo)
@@ -23,11 +26,17 @@ interface TodoDao {
     /**
      * User Profile
      */
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert
     suspend fun profileInsert(profile: Profile)
 
     @Update
     suspend fun profileUpdate(profile: Profile)
+
+    @Query("UPDATE profile SET username = :username WHERE id = :id")
+    suspend fun updateProfileUsername(id: Int, username: String)
+
+    @Query("UPDATE profile SET image_name = :imageName WHERE id = :id")
+    suspend fun updateProfileImage(id: Int, imageName: String)
 
     @Query("SELECT * FROM profile")
     fun getProfile(): LiveData<Profile>

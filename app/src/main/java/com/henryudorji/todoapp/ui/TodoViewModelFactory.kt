@@ -1,5 +1,6 @@
 package com.henryudorji.todoapp.ui
 
+import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.henryudorji.todoapp.data.TodoRepository
@@ -9,10 +10,11 @@ import com.henryudorji.todoapp.data.TodoRepository
 //
 @Suppress("UNCHECKED_CAST")
 class TodoViewModelFactory(
-        private val todoRepository: TodoRepository
+        private val todoRepository: TodoRepository,
+        private val application: Application
 ) : ViewModelProvider.NewInstanceFactory(){
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return TodoViewModel(todoRepository) as T
+        return TodoViewModel(todoRepository, application) as T
     }
 }

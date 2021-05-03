@@ -10,18 +10,18 @@ import androidx.room.PrimaryKey
 //
 @Entity(tableName = "todo")
 data class Todo(
-        val title: String,
-        val description: String,
-        val date: Long,
+        var title: String,
+        var description: String,
+        var date: Long,
         @ColumnInfo(name = "alarm_time")
-        val alarmTime: Long? = null,
-        val category: String,
-        val priority: Int,
+        var alarmTime: Long? = null,
+        var category: Category,
+        var priority: Priority,
+        var isTaskCompleted: Boolean,
         @ColumnInfo(name = "todo_audio_path")
-        val todoAudioPath: String? = null,
-        @ColumnInfo(name = "todo_image")
-        val todoImage: Bitmap? = null,
-        val location: String? = null
+        var todoAudioPath: String? = null,
+        @ColumnInfo(name = "todo_image_path")
+        var todoImagePath: String? = null
 ) {
         @PrimaryKey(autoGenerate = true)
         var id: Int? = null

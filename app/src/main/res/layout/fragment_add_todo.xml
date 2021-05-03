@@ -222,13 +222,13 @@
                 android:layout_marginEnd="@dimen/_10sdp"
                 app:layout_constraintTop_toBottomOf="@id/categoryText"
                 app:layout_constraintStart_toEndOf="@id/workBtn"
-                app:layout_constraintEnd_toStartOf="@id/schoolBtn"/>
+                app:layout_constraintEnd_toStartOf="@id/studyBtn"/>
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/schoolBtn"
+                android:id="@+id/studyBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="School"
+                android:text="Study"
                 android:textAllCaps="false"
                 android:textColor="@color/dark_gray"
                 android:fontFamily="@font/raleway_regular"
@@ -237,6 +237,39 @@
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_marginEnd="@dimen/_20sdp"
                 app:layout_constraintTop_toBottomOf="@id/categoryText"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/funBtn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Fun"
+                android:textAllCaps="false"
+                android:textColor="@color/dark_gray"
+                android:fontFamily="@font/raleway_regular"
+                android:padding="@dimen/_10sdp"
+                android:backgroundTint="@color/notify_8"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_20sdp"
+                app:layout_constraintTop_toBottomOf="@id/familyBtn"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/sportsBtn"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/sportsBtn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Sports"
+                android:textAllCaps="false"
+                android:textColor="@color/dark_gray"
+                android:fontFamily="@font/raleway_regular"
+                android:backgroundTint="@color/notify_9"
+                android:padding="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:layout_marginStart="@dimen/_10sdp"
+                app:layout_constraintTop_toBottomOf="@id/familyBtn"
+                app:layout_constraintStart_toEndOf="@id/funBtn"
                 app:layout_constraintEnd_toEndOf="parent"/>
 
 
@@ -324,7 +357,7 @@
                 android:layout_marginTop="@dimen/_20sdp"
                 android:layout_marginStart="@dimen/_40sdp"
                 android:layout_marginEnd="@dimen/_40sdp"
-                app:layout_constraintTop_toBottomOf="@id/familyBtn"
+                app:layout_constraintTop_toBottomOf="@id/sportsBtn"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"/>
         </androidx.constraintlayout.widget.ConstraintLayout>

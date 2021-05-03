@@ -30,7 +30,7 @@
         android:id="@+id/greenCircle"
         android:layout_width="@dimen/_10sdp"
         android:layout_height="@dimen/_10sdp"
-        android:layout_marginStart="36dp"
+        android:layout_marginStart="@dimen/_35sdp"
         android:layout_marginTop="@dimen/_5sdp"
         android:background="@drawable/green_circle"
         app:layout_constraintStart_toStartOf="@+id/profileImage"

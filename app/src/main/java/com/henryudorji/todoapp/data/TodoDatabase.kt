@@ -19,7 +19,7 @@ import com.henryudorji.todoapp.data.model.Todo
         version = 1,
         exportSchema = false
 )
-@TypeConverters(Converters::class)
+//@TypeConverters(Converters::class)
 abstract class TodoDatabase: RoomDatabase(){
     abstract fun getTodoDao(): TodoDao
 

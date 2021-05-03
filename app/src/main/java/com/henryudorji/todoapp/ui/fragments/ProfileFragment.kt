@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
+import androidx.core.graphics.drawable.toBitmap
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
@@ -17,10 +18,15 @@ import com.henryudorji.todoapp.databinding.FragmentProfileBinding
 import com.henryudorji.todoapp.ui.MainActivity
 import com.henryudorji.todoapp.ui.TodoViewModel
 import com.henryudorji.todoapp.utils.*
-import com.henryudorji.todoapp.utils.Constants.APP_HAS_LAUNCHED_BEFORE
 import com.henryudorji.todoapp.utils.Constants.IMAGE_REQUEST_CODE
 import com.henryudorji.todoapp.utils.Constants.PASS_CODE_IS_SET
 import com.henryudorji.todoapp.utils.Constants.PROFILE_SETUP_IS_DONE
+import com.henryudorji.todoapp.utils.Constants.TODO_FILE_DIR
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import java.io.File
 
 //
 // Created by hash on 4/23/2021.
@@ -50,47 +56,40 @@ class ProfileFragment : Fragment(R.layout.fragment_profile){
             it.findNavController().navigateUp()
         }
 
-        viewModel.getProfile().observe(viewLifecycleOwner, Observer {
+        if (requireActivity().getBooleanFromPref(PROFILE_SETUP_IS_DONE)) {
+            viewModel.getProfile().observe(viewLifecycleOwner, Observer {
 
-            binding.profileImage.loadImage(it?.image)
-
-            if (it != null) {
+                CoroutineScope(Dispatchers.IO).launch {
+                    val imageBitmap = it.imageName.let { imageName ->
+                        FileStorageManager.getImageFromInternalStorage(requireContext(), imageName)
+                    }
+                    withContext(Dispatchers.Main) {
+                        binding.profileImage.loadImage(imageBitmap)
+                    }
+                }
                 binding.username.setText(it.username)
-                binding.passcode.setText("${it.passcode}")
-            }
-
-        })
+            })
+        }
 
         binding.profileImage.setOnClickListener {
             openImagePicker()
         }
 
-        binding.fingerPrint.setOnClickListener {
-            binding.root.showSnackBar("Feature coming soon!")
-        }
-
         binding.updateBtn.setOnClickListener {
             val username = binding.username.text.toString()
-            val passcode = binding.passcode.text.toString()
-
-            //@todo onStart of application show security prompt to user
-            if (passcode.isNotEmpty()) {
-                context?.putBooleanInPref(PASS_CODE_IS_SET, true)
-            }else {
-                context?.putBooleanInPref(PASS_CODE_IS_SET, false)
-            }
-
-            if (bitmap == null) {
-                bitmap = BitmapFactory.decodeResource(resources, R.drawable.profile)
-            }
-            viewModel.validateUserInput(bitmap, username, passcode)
+            bitmap = binding.profileImage.drawable.toBitmap()
+            viewModel.validateUserInput(bitmap!!, username)
 
 
             viewModel.profileResponse.observe(viewLifecycleOwner, Observer { response ->
                 when (response) {
                     is Resource.Success -> {
-                        context?.putBooleanInPref(PROFILE_SETUP_IS_DONE, true)
-                        findNavController().navigate(R.id.action_profileFragment_to_homeFragment)
+                        if (!requireContext().getBooleanFromPref(PROFILE_SETUP_IS_DONE)) {
+                            context?.putBooleanInPref(PROFILE_SETUP_IS_DONE, true)
+                            findNavController().navigate(R.id.action_profileFragment_to_homeFragment)
+                        }else {
+                            binding.root.showSnackBar("Profile update successful")
+                        }
                     }
                     is Resource.Error -> {
                         response.message?.let { binding.root.showSnackBar(it) }

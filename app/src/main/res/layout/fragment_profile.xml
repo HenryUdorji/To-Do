@@ -33,32 +33,28 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/addImage"
-        android:layout_width="@dimen/_20sdp"
-        android:layout_height="@dimen/_20sdp"
-        android:layout_marginStart="@dimen/_80sdp"
+        android:layout_width="@dimen/_25sdp"
+        android:layout_height="@dimen/_25sdp"
+        android:layout_marginStart="@dimen/_70sdp"
         android:layout_marginTop="@dimen/_70sdp"
-        android:src="@drawable/ic_add"
-        android:background="@color/gold"
+        android:src="@drawable/ic_add_circle"
         app:layout_constraintStart_toStartOf="@+id/profileImage"
         app:layout_constraintTop_toTopOf="@+id/profileImage" />
 
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputUsername"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_20sdp"
-        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_40sdp"
         android:layout_marginEnd="@dimen/_20sdp"
         android:hint="Username"
+        app:boxBackgroundMode="filled"
+        app:boxBackgroundColor="@color/app_background_color"
+        app:boxStrokeColor="@color/dark_gray"
         android:textColorHint="@color/colorSecondaryText"
-        app:boxStrokeColor="@color/colorDarkMode"
         app:hintTextColor="@color/colorDarkMode"
-        app:boxCornerRadiusBottomEnd="@dimen/_10sdp"
-        app:boxCornerRadiusBottomStart="@dimen/_10sdp"
-        app:boxCornerRadiusTopEnd="@dimen/_10sdp"
-        app:boxCornerRadiusTopStart="@dimen/_10sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/profileImage">
@@ -72,49 +68,6 @@
             android:textCursorDrawable="@drawable/cursor_bg"
             android:textSize="@dimen/_18ssp"/>
     </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputPasscode"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_20sdp"
-        android:layout_marginTop="@dimen/_20sdp"
-        android:layout_marginEnd="@dimen/_20sdp"
-        android:hint="Passcode"
-        app:passwordToggleEnabled="true"
-        android:textColorHint="@color/colorSecondaryText"
-        app:boxStrokeColor="@color/colorDarkMode"
-        app:hintTextColor="@color/colorDarkMode"
-        app:boxCornerRadiusBottomEnd="@dimen/_10sdp"
-        app:boxCornerRadiusBottomStart="@dimen/_10sdp"
-        app:boxCornerRadiusTopEnd="@dimen/_10sdp"
-        app:boxCornerRadiusTopStart="@dimen/_10sdp"
-        app:layout_constraintTop_toBottomOf="@id/textInputUsername"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/passcode"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/dark_gray"
-            app:layout_constraintTop_toBottomOf="@id/profileImage"
-            android:fontFamily="@font/raleway_regular"
-            android:textCursorDrawable="@drawable/cursor_bg"
-            android:inputType="numberDecimal"
-            android:textSize="@dimen/_18ssp"/>
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <ImageView
-        android:id="@+id/fingerPrint"
-        android:layout_width="@dimen/_80sdp"
-        android:layout_height="@dimen/_80sdp"
-        android:layout_marginTop="@dimen/_20sdp"
-        android:background="@drawable/ic_finger_print"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textInputPasscode"/>
 
 
     <Button
@@ -130,6 +83,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fingerPrint" />
+        app:layout_constraintTop_toBottomOf="@+id/textInputUsername" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

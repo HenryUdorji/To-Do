@@ -9,7 +9,10 @@ import com.henryudorji.todoapp.data.model.Todo
 class TodoRepository(
         private val db: TodoDatabase
 ) {
-    suspend fun upsert(todo: Todo) = db.getTodoDao().upsert(todo)
+
+    suspend fun todoInsert(todo: Todo) = db.getTodoDao().todoInsert(todo)
+
+    suspend fun todoUpdate(todo: Todo) = db.getTodoDao().todoUpdate(todo)
 
     suspend fun delete(todo: Todo) = db.getTodoDao().deleteTodo(todo)
 

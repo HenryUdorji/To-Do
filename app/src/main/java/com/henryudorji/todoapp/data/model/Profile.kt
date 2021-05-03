@@ -1,6 +1,7 @@
 package com.henryudorji.todoapp.data.model
 
 import android.graphics.Bitmap
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
@@ -11,7 +12,7 @@ import androidx.room.PrimaryKey
 data class Profile(
         @PrimaryKey
         var id: Int,
-        val username: String,
-        val passcode: String? = null,
-        val image: Bitmap? = null
+        var username: String,
+        @ColumnInfo(name = "image_name")
+        var imageName: String
 )
