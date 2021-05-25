@@ -4,9 +4,10 @@ package com.henryudorji.todoapp.utils
 // Created by  on 4/28/2021.
 //
 sealed class Resource<T>(
-        val message: String? = null
+    val data: T? = null,
+    val message: String? = null
 ) {
-    class Success<T>(message: String? = null): Resource<T>(message)
-    class Error<T>(message: String? = null): Resource<T>(message)
+    class Success<T>(message: String? = null, data: T? = null): Resource<T>(data, message)
+    class Error<T>(message: String? = null, data: T? = null): Resource<T>(data, message)
     class Loading<T>: Resource<T>()
 }

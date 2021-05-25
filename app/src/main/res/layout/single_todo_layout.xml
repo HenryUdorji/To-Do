@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/_120sdp"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardCornerRadius="@dimen/_15sdp"
-    app:cardElevation="@dimen/_10sdp"
+    app:cardCornerRadius="@dimen/_10sdp"
     app:cardBackgroundColor="@color/app_background_color"
     android:layout_marginTop="@dimen/_10sdp"
     android:layout_marginStart="@dimen/_10sdp"
@@ -16,28 +16,66 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <View
-            android:id="@+id/indicator"
-            android:layout_width="@dimen/_50sdp"
-            android:layout_height="match_parent"
-            android:background="@drawable/view_bg"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
-
         <TextView
-            android:id="@+id/priotity"
+            android:id="@+id/priority"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/raleway_bold"
-            android:text="High"
+            android:text="Medium"
+            android:background="@drawable/medium_bg"
+            android:padding="@dimen/_5sdp"
             android:textAlignment="center"
             android:textColor="@color/colorWhite"
-            android:textSize="@dimen/_12ssp"
-            app:layout_constraintTop_toTopOf="@id/indicator"
-            app:layout_constraintEnd_toEndOf="@id/indicator"
-            app:layout_constraintStart_toStartOf="@id/indicator"
-            app:layout_constraintBottom_toBottomOf="@id/indicator"/>
+            android:textSize="@dimen/_10ssp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
 
+
+        <TextView
+            android:id="@+id/category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/sports"
+            android:fontFamily="@font/raleway_bold"
+            android:padding="@dimen/_5sdp"
+            android:text="Sports"
+            android:textAlignment="center"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/_10ssp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/taskTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/raleway_bold"
+            android:padding="@dimen/_5sdp"
+            android:text="I am going to school today"
+            android:textAlignment="center"
+            android:textColor="@color/dark_gray"
+            android:textSize="@dimen/_18ssp"
+            android:layout_marginTop="@dimen/_3sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/priority" />
+
+
+
+        <TextView
+            android:id="@+id/taskTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:fontFamily="@font/raleway_bold"
+            android:padding="@dimen/_5sdp"
+            android:text="05:05pm"
+            android:layout_margin="@dimen/_2sdp"
+            android:textColor="@color/dark_gray"
+            android:textSize="@dimen/_10ssp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/taskTitle" />
+<!--
         <ImageView
             android:id="@+id/alarmIcon"
             android:layout_width="@dimen/_20sdp"
@@ -63,6 +101,6 @@
             android:src="@drawable/ic_finger_print"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/imageIcon"
-            app:tint="@color/dark_gray" />
+            app:tint="@color/dark_gray" />-->
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

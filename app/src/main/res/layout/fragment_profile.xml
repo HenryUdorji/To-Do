@@ -79,6 +79,7 @@
         android:backgroundTint="@color/colorDarkMode"
         android:fontFamily="@font/raleway_regular"
         android:text="Update"
+        android:textColor="@color/white"
         android:textAllCaps="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

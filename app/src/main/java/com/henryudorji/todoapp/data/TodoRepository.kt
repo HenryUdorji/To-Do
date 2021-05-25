@@ -1,6 +1,5 @@
 package com.henryudorji.todoapp.data
 
-import com.henryudorji.todoapp.data.model.Profile
 import com.henryudorji.todoapp.data.model.Todo
 
 //
@@ -16,15 +15,8 @@ class TodoRepository(
 
     suspend fun delete(todo: Todo) = db.getTodoDao().deleteTodo(todo)
 
+    fun getTodo(id: Int?) = db.getTodoDao().getTodo(id)
+
     fun getAllTodo() = db.getTodoDao().getAllTodo()
 
-
-    /**
-     * User Profile
-     */
-    suspend fun profileInsert(profile: Profile) = db.getTodoDao().profileInsert(profile)
-
-    suspend fun profileUpdate(profile: Profile) = db.getTodoDao().profileUpdate(profile)
-
-    fun getProfile() = db.getTodoDao().getProfile()
 }

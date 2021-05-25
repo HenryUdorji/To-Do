@@ -5,23 +5,24 @@
     <color name="gold">#ffd800</color>
     <color name="dark_orange">#ff9100</color>
     <color name="dark_gray">#2f2f2f</color>
-    <color name="light_gray">#D8D5D5</color>
+    <color name="light_gray">#A8A4A4</color>
+    <color name="colorAccentText">#0741AD</color>
     <color name="app_background_color">#f7f7f7</color>
 
     <color name="notify_1">#ff5c5c</color>
     <color name="notify_2">#00b986</color>
-    <color name="notify_8">#82ECCF</color>
+    <color name="fun">#82ECCF</color>
     <color name="notify_3">#c1eadf</color>
     <color name="notify_4">#236cb7</color>
-    <color name="notify_5">#cfdfef</color>
+    <color name="family">#cfdfef</color>
     <color name="notify_6">#ffb493</color>
-    <color name="notify_7">#FA99BA</color>
-    <color name="notify_9">#A57CED</color>
+    <color name="study">#FA99BA</color>
+    <color name="sports">#A57CED</color>
 
-    <color name="notify_1_set">#ff5c5c</color>
-    <color name="notify_4_set">#236cb7</color>
+    <color name="high_set">#ff5c5c</color>
+    <color name="low_set">#236cb7</color>
     <color name="notify_5_set">#3392F1</color>
-    <color name="notify_6_set">#EF723B</color>
+    <color name="medium_set">#EF723B</color>
     <color name="notify_7_set">#ED4C83</color>
     <color name="notify_8_set">#00b986</color>
     <color name="notify_9_set">#673AB7</color>
@@ -32,7 +33,6 @@
     <color name="colorPrimaryText">#111111</color>
     <color name="colorSecondaryText">#403D3D</color>
     <color name="colorPrimaryWhite">#FFFFFF</color>
-    <color name="colorAccentText">#0741AD</color>
     <color name="colorDanger">#AD0707</color>
     <color name="colorYellow">#FF9800</color>
     <color name="colorDarkMode">#323c57</color>

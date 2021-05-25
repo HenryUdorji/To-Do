@@ -2,72 +2,97 @@ package com.henryudorji.todoapp.ui
 
 import android.app.Application
 import android.graphics.Bitmap
+import android.os.Build
 import android.util.Log
 import androidx.lifecycle.*
 import com.henryudorji.todoapp.base.BaseApplication
 import com.henryudorji.todoapp.data.TodoRepository
-import com.henryudorji.todoapp.data.model.Profile
-import com.henryudorji.todoapp.utils.Constants.PROFILE_SETUP_IS_DONE
-import com.henryudorji.todoapp.utils.FileStorageManager
+import com.henryudorji.todoapp.data.model.Todo
+import com.henryudorji.todoapp.utils.ImageStorageManager
 import com.henryudorji.todoapp.utils.Resource
 import com.henryudorji.todoapp.utils.getBooleanFromPref
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
+import java.text.SimpleDateFormat
+import java.time.Instant
+import java.time.LocalDateTime
+import java.time.ZoneId
+import java.time.format.DateTimeFormatter
+import java.util.*
 
 //
 // Created by hash on 4/28/2021.
 //
 class TodoViewModel(
-        private val todoRepository: TodoRepository,
-        application: Application
+    private val todoRepository: TodoRepository,
+    application: Application
 ): AndroidViewModel(application) {
 
     private val TAG = "TodoViewModel"
-    private val _profileResponse: MutableLiveData<Resource<Profile>> = MutableLiveData()
-    val profileResponse: LiveData<Resource<Profile>>
-        get() = _profileResponse
+
+    private var _userImageData: MutableLiveData<Resource<Bitmap>> = MutableLiveData()
+    val userImageData: LiveData<Resource<Bitmap>>
+        get() = _userImageData
+
+    private var _dateSelected: MutableLiveData<Resource<String?>> = MutableLiveData()
+    val dateSelected: LiveData<Resource<String?>>
+        get() = _dateSelected
+
+    private var _millisToHours: MutableLiveData<Resource<String?>> = MutableLiveData()
+    val millisToHours: LiveData<Resource<String?>>
+        get() = _millisToHours
+
+    val todoResponse = MutableLiveData<Boolean>()
 
 
-    /**
-     * Profile
-     */
-    private fun profileInsert(profile: Profile) = viewModelScope.launch {
-        try {
-            todoRepository.profileInsert(profile)
-        }catch (e: Exception) {
-            Log.d(TAG, "profileInsert: ${e.message}")
-        }
+    fun insertTodo(todo: Todo) = viewModelScope.launch {
+        todoRepository.todoInsert(todo)
     }
 
-    private fun profileUpdate(profile: Profile) = viewModelScope.launch {
-        try {
-            todoRepository.profileUpdate(profile)
-        }catch (e: Exception) {
-            Log.d(TAG, "profileUpdate: ${e.message}")
-        }
-
+    fun updateTodo(todo: Todo) = viewModelScope.launch {
+        todoRepository.todoUpdate(todo)
     }
 
-    fun getProfile() = todoRepository.getProfile()
+    fun getTodo(id: Int?) = todoRepository.getTodo(id)
 
-    fun validateUserInput(bitmap: Bitmap, username: String) {
-        if (username.isEmpty()) {
-            _profileResponse.postValue(Resource.Error("Username should not be empty"))
+    fun getAllTodo() = todoRepository.getAllTodo()
+
+
+    fun onDateSelected(dateTimeInMillis: Long?) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val dateTime = LocalDateTime.ofInstant(Instant.ofEpochMilli(dateTimeInMillis!!), ZoneId.systemDefault())
+            val dateString = dateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+            _dateSelected.postValue(Resource.Success(null, dateString))
         }else {
-            viewModelScope.launch {
-                FileStorageManager.saveImageToInternalStorage(
-                        getApplication<BaseApplication>(), bitmap, "${username}_1.png")
-            }
-
-            if (!getApplication<BaseApplication>().getBooleanFromPref(PROFILE_SETUP_IS_DONE)) {
-                //Showing the profile fragment for the first time
-                profileInsert(Profile(1, username, "${username}_1.png"))
-                Log.d(TAG, "validateUserInput: Profile insert")
-            }else {
-                profileUpdate(Profile(1, username, "${username}_1.png"))
-                Log.d(TAG, "validateUserInput: Profile update")
-            }
-            _profileResponse.postValue(Resource.Success("Profile setup successful"))
+            val dateTime = SimpleDateFormat("yyyy-MM-dd")
+            val dateString = dateTime.format(Date(dateTimeInMillis!!))
+            _dateSelected.postValue(Resource.Success(null, dateString))
         }
     }
 
+    fun convertMillisToHoursAndMinutes(millis: Long) {
+        val hour = millis / 3600
+        val minute = millis / 60000
+        val hourAsText = if (hour < 10) "0$hour" else hour
+        val minuteAsText = if (minute < 10) "0$minute" else minute
+        _millisToHours.postValue(Resource.Success(null, "$hourAsText:$minuteAsText"))
+    }
+
+    fun saveUserImage(bitmap: Bitmap) {
+        viewModelScope.launch {
+            ImageStorageManager.saveImageToInternalStorage(
+                getApplication<BaseApplication>(), bitmap, "userProfile.png")
+        }
+    }
+
+    fun getUserImage() {
+        viewModelScope.launch {
+            val bitmap = ImageStorageManager.getImageFromInternalStorage(
+                getApplication<BaseApplication>(), "userProfile.png")
+            if (bitmap == null) {
+                _userImageData.postValue(Resource.Error("Click on the image to setup your image!"))
+            }else {
+                _userImageData.postValue(Resource.Success(null, bitmap))
+            }
+        }
+    }
 }

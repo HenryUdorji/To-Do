@@ -1,6 +1,5 @@
 package com.henryudorji.todoapp.data.model
 
-import android.graphics.Bitmap
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -10,18 +9,16 @@ import androidx.room.PrimaryKey
 //
 @Entity(tableName = "todo")
 data class Todo(
-        var title: String,
-        var description: String,
-        var date: Long,
+        var title: String? = null,
+        var date: Long? = null,
         @ColumnInfo(name = "alarm_time")
         var alarmTime: Long? = null,
-        var category: Category,
-        var priority: Priority,
-        var isTaskCompleted: Boolean,
-        @ColumnInfo(name = "todo_audio_path")
-        var todoAudioPath: String? = null,
-        @ColumnInfo(name = "todo_image_path")
-        var todoImagePath: String? = null
+        @ColumnInfo(name = "remind_me")
+        var remindMe: Boolean = false,
+        var category: Category = Category.Work,
+        var priority: Priority = Priority.Low,
+        @ColumnInfo(name = "task_state")
+        var taskState: TaskState = TaskState.Pending,
 ) {
         @PrimaryKey(autoGenerate = true)
         var id: Int? = null

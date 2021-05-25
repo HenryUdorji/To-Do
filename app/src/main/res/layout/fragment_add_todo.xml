@@ -71,10 +71,10 @@
                     android:textColor="@color/dark_gray"
                     android:fontFamily="@font/raleway_regular"
                     android:textCursorDrawable="@drawable/cursor_bg"
-                    android:textSize="@dimen/_18ssp"/>
+                    android:textSize="@dimen/_16ssp"/>
             </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
+            <!--<com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInputTaskDesc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -98,8 +98,8 @@
                     android:textColor="@color/dark_gray"
                     android:fontFamily="@font/raleway_regular"
                     android:textCursorDrawable="@drawable/cursor_bg"
-                    android:textSize="@dimen/_18ssp"/>
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:textSize="@dimen/_16ssp"/>
+            </com.google.android.material.textfield.TextInputLayout>-->
 
             <ImageView
                 android:id="@+id/calenderImage"
@@ -109,7 +109,7 @@
                 android:layout_marginTop="@dimen/_20sdp"
                 android:src="@drawable/ic_calender"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/textInputTaskDesc"
+                app:layout_constraintTop_toBottomOf="@id/textInputTaskTitle"
                 app:tint="@color/dark_gray" />
 
             <TextView
@@ -178,100 +178,6 @@
                 app:layout_constraintTop_toTopOf="@+id/remindMeSwitch" />
 
 
-            <TextView
-                android:id="@+id/categoryText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/raleway_bold"
-                android:padding="@dimen/_5sdp"
-                android:text="Category"
-                android:textColor="@color/dark_gray"
-                android:textSize="@dimen/_17ssp"
-                android:layout_marginTop="@dimen/_20sdp"
-                android:layout_marginStart="@dimen/_20sdp"
-                app:layout_constraintTop_toBottomOf="@id/lowBtn"
-                app:layout_constraintStart_toStartOf="parent"/>
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/workBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Work"
-                android:textAllCaps="false"
-                android:textColor="@color/dark_gray"
-                android:fontFamily="@font/raleway_regular"
-                android:padding="@dimen/_10sdp"
-                android:backgroundTint="@color/notify_6"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginStart="@dimen/_20sdp"
-                app:layout_constraintTop_toBottomOf="@id/categoryText"
-                app:layout_constraintStart_toStartOf="parent"/>
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/familyBtn"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="Family"
-                android:textAllCaps="false"
-                android:fontFamily="@font/raleway_regular"
-                android:textColor="@color/dark_gray"
-                android:padding="@dimen/_10sdp"
-                android:backgroundTint="@color/notify_5"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginEnd="@dimen/_10sdp"
-                app:layout_constraintTop_toBottomOf="@id/categoryText"
-                app:layout_constraintStart_toEndOf="@id/workBtn"
-                app:layout_constraintEnd_toStartOf="@id/studyBtn"/>
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/studyBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Study"
-                android:textAllCaps="false"
-                android:textColor="@color/dark_gray"
-                android:fontFamily="@font/raleway_regular"
-                android:backgroundTint="@color/notify_7"
-                android:padding="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginEnd="@dimen/_20sdp"
-                app:layout_constraintTop_toBottomOf="@id/categoryText"
-                app:layout_constraintEnd_toEndOf="parent"/>
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/funBtn"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="Fun"
-                android:textAllCaps="false"
-                android:textColor="@color/dark_gray"
-                android:fontFamily="@font/raleway_regular"
-                android:padding="@dimen/_10sdp"
-                android:backgroundTint="@color/notify_8"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginStart="@dimen/_20sdp"
-                app:layout_constraintTop_toBottomOf="@id/familyBtn"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/sportsBtn"/>
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/sportsBtn"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="Sports"
-                android:textAllCaps="false"
-                android:textColor="@color/dark_gray"
-                android:fontFamily="@font/raleway_regular"
-                android:backgroundTint="@color/notify_9"
-                android:padding="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginEnd="@dimen/_20sdp"
-                android:layout_marginStart="@dimen/_10sdp"
-                app:layout_constraintTop_toBottomOf="@id/familyBtn"
-                app:layout_constraintStart_toEndOf="@id/funBtn"
-                app:layout_constraintEnd_toEndOf="parent"/>
-
 
             <TextView
                 android:id="@+id/priorityText"
@@ -287,68 +193,129 @@
                 app:layout_constraintTop_toBottomOf="@id/remindMeSwitch"
                 app:layout_constraintStart_toStartOf="parent"/>
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/lowBtn"
+            <com.google.android.material.button.MaterialButtonToggleGroup
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Low"
-                android:textAllCaps="false"
-                android:textColor="@color/dark_gray"
-                android:fontFamily="@font/raleway_regular"
-                android:padding="@dimen/_10sdp"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                app:strokeColor="@color/notify_4"
-                app:strokeWidth="@dimen/_1sdp"
-                android:backgroundTint="@color/app_background_color"
+                android:id="@+id/toggleGroupPriority"
+                app:singleSelection="true"
+                android:elevation="0dp"
+                app:checkedButton="@id/lowBtn"
                 android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginStart="@dimen/_20sdp"
                 app:layout_constraintTop_toBottomOf="@id/priorityText"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/lowBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Low"
+                    android:textAllCaps="false"
+                    android:textColor="@color/dark_gray"
+                    android:fontFamily="@font/raleway_regular"
+                    android:padding="@dimen/_10sdp"
+                    app:layout_constraintTop_toBottomOf="@id/priorityText"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/mediumBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Medium"
+                    android:textAllCaps="false"
+                    android:fontFamily="@font/raleway_regular"
+                    android:textColor="@color/dark_gray"
+                    android:padding="@dimen/_10sdp"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/highBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="High"
+                    android:textAllCaps="false"
+                    android:textColor="@color/dark_gray"
+                    android:fontFamily="@font/raleway_regular"
+                    android:padding="@dimen/_10sdp"/>
+            </com.google.android.material.button.MaterialButtonToggleGroup>
+
+
+            <TextView
+                android:id="@+id/categoryText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/raleway_bold"
+                android:padding="@dimen/_5sdp"
+                android:text="Category"
+                android:textColor="@color/dark_gray"
+                android:textSize="@dimen/_17ssp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginStart="@dimen/_20sdp"
+                app:layout_constraintTop_toBottomOf="@id/toggleGroupPriority"
                 app:layout_constraintStart_toStartOf="parent"/>
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/mediumBtn"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="Medium"
-                android:textAllCaps="false"
-                android:fontFamily="@font/raleway_regular"
-                android:textColor="@color/dark_gray"
-                android:padding="@dimen/_10sdp"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                app:strokeColor="@color/notify_6"
-                app:strokeWidth="@dimen/_1sdp"
-                android:backgroundTint="@color/app_background_color"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginEnd="@dimen/_10sdp"
-                app:layout_constraintTop_toBottomOf="@id/priorityText"
-                app:layout_constraintStart_toEndOf="@id/lowBtn"
-                app:layout_constraintEnd_toStartOf="@id/highBtn"/>
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/highBtn"
+            <com.google.android.material.button.MaterialButtonToggleGroup
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="High"
-                android:textAllCaps="false"
-                android:textColor="@color/dark_gray"
-                android:fontFamily="@font/raleway_regular"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                app:strokeColor="@color/notify_1"
-                app:strokeWidth="@dimen/_1sdp"
-                android:backgroundTint="@color/app_background_color"
-                android:padding="@dimen/_10sdp"
+                android:id="@+id/toggleGroupCat"
+                app:singleSelection="true"
+                android:orientation="horizontal"
                 android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginEnd="@dimen/_20sdp"
-                app:layout_constraintTop_toBottomOf="@id/priorityText"
-                app:layout_constraintEnd_toEndOf="parent"/>
+                android:elevation="0dp"
+                style="@style/ThemeMaterialToggleGroup"
+                app:checkedButton="@id/workBtn"
+                app:layout_constraintTop_toBottomOf="@id/categoryText"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/workBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Work"
+                    android:textAllCaps="false"
+                    android:textColor="@color/dark_gray"
+                    android:fontFamily="@font/raleway_regular"
+                    android:padding="@dimen/_10sdp"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/studyBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Study"
+                    android:textAllCaps="false"
+                    android:textColor="@color/dark_gray"
+                    android:fontFamily="@font/raleway_regular"
+                    android:padding="@dimen/_10sdp"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/funBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Fun"
+                    android:textAllCaps="false"
+                    android:textColor="@color/dark_gray"
+                    android:fontFamily="@font/raleway_regular"
+                    android:padding="@dimen/_10sdp"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/sportsBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sports"
+                    android:textAllCaps="false"
+                    android:textColor="@color/dark_gray"
+                    android:fontFamily="@font/raleway_regular"
+                    android:padding="@dimen/_10sdp"/>
+
+            </com.google.android.material.button.MaterialButtonToggleGroup>
 
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/addTodoBtn"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Add Todo"
+                android:text="Add Task"
                 android:textColor="@color/colorWhite"
                 android:textAllCaps="false"
                 android:fontFamily="@font/raleway_regular"
@@ -357,7 +324,7 @@
                 android:layout_marginTop="@dimen/_20sdp"
                 android:layout_marginStart="@dimen/_40sdp"
                 android:layout_marginEnd="@dimen/_40sdp"
-                app:layout_constraintTop_toBottomOf="@id/sportsBtn"
+                app:layout_constraintTop_toBottomOf="@id/toggleGroupCat"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"/>
         </androidx.constraintlayout.widget.ConstraintLayout>

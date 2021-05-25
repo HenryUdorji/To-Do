@@ -4,10 +4,12 @@
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/app_background_color</item>
         <item name="colorPrimaryVariant">@color/app_background_color</item>
-        <item name="colorOnPrimary">@color/gold</item>
+        <item name="colorOnPrimary">@color/colorAccentText</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="materialCalendarTheme">@style/ThemeMaterialCalender</item>
+        <item name="materialTimePickerTheme">@style/ThemeMaterialTimePicker</item>
     </style>
 
     <style name="SplashTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
@@ -19,9 +21,57 @@
         <item name="fontFamily">@font/raleway_regular</item>
     </style>
 
+    <!--Toolbar Style-->
     <style name="ToolbarTextStyle" parent="Widget.AppCompat.TextView">
         <item name="fontFamily">@font/raleway_regular</item>
         <item name="android:textSize">@dimen/_20ssp</item>
         <item name="android:textColor">@color/dark_gray</item>
+    </style>
+
+    <!--Material DatePicker Style-->
+    <style name="ThemeMaterialCalender" parent="ThemeOverlay.MaterialComponents.MaterialCalendar">
+        <item name="shapeAppearanceSmallComponent">@style/ThemeMaterialCalenderSmallComponent</item>
+        <item name="shapeAppearanceMediumComponent">@style/ThemeMaterialCalenderMediumComponent</item>
+        <item name="colorPrimary">@color/colorAccentText</item>
+        <item name="colorOnPrimary">@color/white</item>
+    </style>
+
+    <style name="ThemeMaterialCalenderButton" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="android:textColor">@color/dark_gray</item>
+    </style>
+
+    <style name="ThemeMaterialCalenderSmallComponent" parent="ShapeAppearance.MaterialComponents.SmallComponent">
+        <item name="cornerFamily">rounded</item>
+    </style>
+
+    <style name="ThemeMaterialCalenderMediumComponent" parent="ShapeAppearance.MaterialComponents.MediumComponent">
+        <item name="cornerSize">@dimen/_10sdp</item>
+    </style>
+
+    <style name="ThemeMaterialCalenderTextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
+        <item name="hintTextColor">@color/colorDarkMode</item>
+        <item name="boxBackgroundColor">@color/app_background_color</item>
+        <item name="boxBackgroundMode">filled</item>
+        <item name="boxStrokeColor">@color/dark_gray</item>
+    </style>
+
+    <!--Material Time Picker-->
+    <style name="ThemeMaterialTimePicker" parent="ThemeOverlay.MaterialComponents.TimePicker">
+        <item name="shapeAppearanceSmallComponent">@style/ThemeMaterialCalenderSmallComponent</item>
+        <item name="shapeAppearanceMediumComponent">@style/ThemeMaterialCalenderMediumComponent</item>
+        <item name="colorPrimary">@color/colorAccentText</item>
+        <item name="colorOnPrimary">@color/white</item>
+    </style>
+
+    <style name="ThemeMaterialOutlinedButton" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="strokeColor">@color/toggle_btn_selector</item>
+        <item name="android:paddingLeft">@dimen/mtrl_btn_padding_left</item>
+        <item name="android:paddingRight">@dimen/mtrl_btn_padding_right</item>
+        <item name="strokeWidth">@dimen/mtrl_btn_stroke_size</item>
+    </style>
+
+    <style name="ThemeMaterialToggleGroup" parent="android:Widget">
+        <item name="colorPrimary">@color/colorAccentText</item>
+        <item name="colorOnPrimary">@color/white</item>
     </style>
 </resources>
