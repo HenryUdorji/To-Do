@@ -3,14 +3,12 @@ package com.henryudorji.todoapp.ui
 import android.app.Application
 import android.graphics.Bitmap
 import android.os.Build
-import android.util.Log
 import androidx.lifecycle.*
 import com.henryudorji.todoapp.base.BaseApplication
 import com.henryudorji.todoapp.data.TodoRepository
 import com.henryudorji.todoapp.data.model.Todo
 import com.henryudorji.todoapp.utils.ImageStorageManager
 import com.henryudorji.todoapp.utils.Resource
-import com.henryudorji.todoapp.utils.getBooleanFromPref
 import kotlinx.coroutines.*
 import java.text.SimpleDateFormat
 import java.time.Instant
@@ -57,24 +55,37 @@ class TodoViewModel(
     fun getAllTodo() = todoRepository.getAllTodo()
 
 
-    fun onDateSelected(dateTimeInMillis: Long?) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+    fun onDateSelected(dateTimeInMillis: Long?): String {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val dateTime = LocalDateTime.ofInstant(Instant.ofEpochMilli(dateTimeInMillis!!), ZoneId.systemDefault())
-            val dateString = dateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
-            _dateSelected.postValue(Resource.Success(null, dateString))
+            //_dateSelected.postValue(Resource.Success(null, dateString))
+            dateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
         }else {
             val dateTime = SimpleDateFormat("yyyy-MM-dd")
-            val dateString = dateTime.format(Date(dateTimeInMillis!!))
-            _dateSelected.postValue(Resource.Success(null, dateString))
+            dateTime.format(Date(dateTimeInMillis!!))
+            //_dateSelected.postValue(Resource.Success(null, dateString))
         }
     }
 
-    fun convertMillisToHoursAndMinutes(millis: Long) {
+    fun convertMillisToHoursAndMinutes(millis: Long): String {
         val hour = millis / 3600
         val minute = millis / 60000
         val hourAsText = if (hour < 10) "0$hour" else hour
         val minuteAsText = if (minute < 10) "0$minute" else minute
-        _millisToHours.postValue(Resource.Success(null, "$hourAsText:$minuteAsText"))
+        return "$hourAsText:$minuteAsText"
+        //_millisToHours.postValue(Resource.Success(null, "$hourAsText:$minuteAsText"))
+    }
+
+    fun convertHoursAndMinutesToMillis(hour: Int, minute: Int): Long {
+        //val minuteInMillis = minute * 60000
+        val hoursInMillis = hour * 3600
+        return hoursInMillis.toLong()
+    }
+
+    fun onTimeSelected(hour: Int, minute: Int): String {
+        val hourAsText = if (hour < 10) "0$hour" else hour
+        val minuteAsText = if (minute < 10) "0$minute" else minute
+        return "$hourAsText:$minuteAsText"
     }
 
     fun saveUserImage(bitmap: Bitmap) {
@@ -95,4 +106,5 @@ class TodoViewModel(
             }
         }
     }
+
 }

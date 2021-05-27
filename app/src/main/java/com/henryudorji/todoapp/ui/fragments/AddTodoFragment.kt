@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.text.format.DateFormat.is24HourFormat
 import android.util.Log
 import android.view.View
+import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
@@ -33,8 +35,8 @@ class AddTodoFragment : Fragment(R.layout.fragment_add_todo){
     private val args: AddTodoFragmentArgs by navArgs()
 
     private var todoTitle: String? = null
-    private var date: Long? = null
-    private var time: Long? = null
+    private var date: Long = 0L
+    private var time: Long = 0L
     private var remindMe = false
     private var category = Category.Work
     private var priority = Priority.Low
@@ -77,34 +79,36 @@ class AddTodoFragment : Fragment(R.layout.fragment_add_todo){
             showDatePicker()
         }
 
-        binding.alarmText.setOnClickListener {
-            showTimePicker()
-        }
-        binding.alarmImage.setOnClickListener {
-            showTimePicker()
-        }
+        setCheckedButton(priority.name)
+        setCheckedButton(category.name)
+        showAlarmText(remindMe)
 
         binding.remindMeSwitch.setOnCheckedChangeListener { _, isChecked ->
             remindMe = isChecked
+            showAlarmText(remindMe)
         }
 
-        binding.toggleGroupCat.addOnButtonCheckedListener { _, checkedId, isChecked ->
+        /*binding.toggleGroupCat.addOnButtonCheckedListener { _, checkedId, isChecked ->
             when(checkedId) {
                 binding.workBtn.id -> {
                     category = Category.Work
                     binding.workBtn.isChecked = isChecked
+                    binding.workBtn.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.colorAccentText))
                 }
                 binding.funBtn.id -> {
                     category = Category.Fun
                     binding.funBtn.isChecked = isChecked
+                    binding.funBtn.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.colorAccentText))
                 }
                 binding.sportsBtn.id -> {
                     category = Category.Sports
                     binding.sportsBtn.isChecked = isChecked
+                    binding.sportsBtn.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.colorAccentText))
                 }
                 binding.studyBtn.id -> {
                     category = Category.Study
                     binding.studyBtn.isChecked = isChecked
+                    binding.studyBtn.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.colorAccentText))
                 }
             }
         }
@@ -114,16 +118,26 @@ class AddTodoFragment : Fragment(R.layout.fragment_add_todo){
                 binding.lowBtn.id -> {
                     priority = Priority.Low
                     binding.lowBtn.isChecked = isChecked
+                    binding.lowBtn.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.colorAccentText))
                 }
                 binding.mediumBtn.id -> {
                     priority = Priority.Medium
                     binding.mediumBtn.isChecked = isChecked
+                    binding.mediumBtn.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.colorAccentText))
                 }
                 binding.highBtn.id -> {
                     priority = Priority.High
                     binding.highBtn.isChecked = isChecked
+                    binding.highBtn.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.colorAccentText))
                 }
             }
+        }*/
+
+        //val priorities = binding.toggleGroupPriority.selectedToggles()
+        //setCheckedButton(priorities[0].title.toString())
+        binding.toggleGroupPriority.onToggledListener = { _, toggle, selected ->
+            //Toast.makeText(requireContext(), "$toggle.id is $selected", Toast.LENGTH_LONG).show()
+            setCheckedButton(toggle.title.toString())
         }
 
         binding.addTodoBtn.setOnClickListener {
@@ -137,6 +151,7 @@ class AddTodoFragment : Fragment(R.layout.fragment_add_todo){
                     todo.id = updateTodoId
                     viewModel.updateTodo(todo)
                     Log.d(TAG, "validateTodo: UPDATE")
+                    Log.d(TAG, todo.id.toString())
                 }
                 findNavController().apply {
                     navigateUp()
@@ -147,7 +162,7 @@ class AddTodoFragment : Fragment(R.layout.fragment_add_todo){
         }
 
         //OBSERVERS
-        viewModel.dateSelected.observe(viewLifecycleOwner, { date ->
+        /*viewModel.dateSelected.observe(viewLifecycleOwner, { date ->
             if (date.data.isNullOrEmpty()) {
                 binding.dateText.text = "Date"
             }else {
@@ -161,13 +176,13 @@ class AddTodoFragment : Fragment(R.layout.fragment_add_todo){
             }else {
                 binding.alarmText.text = time.data
             }
-        })
+        })*/
 
         viewModel.getTodo(updateTodoId).observe(viewLifecycleOwner, {
             if (it != null) {
                 binding.title.setText(it.title)
-                viewModel.onDateSelected(it.date)
-                viewModel.convertMillisToHoursAndMinutes(it.alarmTime!!)
+                binding.dateText.text = viewModel.onDateSelected(it.date)
+                binding.alarmText.text = viewModel.convertMillisToHoursAndMinutes(it.alarmTime)
                 binding.remindMeSwitch.isChecked = it.remindMe == true
                 setCheckedButton(it.priority.name)
                 setCheckedButton(it.category.name)
@@ -176,7 +191,7 @@ class AddTodoFragment : Fragment(R.layout.fragment_add_todo){
 
     }
 
-    private fun setCheckedButton(name: String?) {
+    /*private fun setCheckedButton(name: String?) {
         when(name) {
             "WORK" -> binding.workBtn.isChecked = true
             "FUN" -> binding.funBtn.isChecked = true
@@ -186,19 +201,34 @@ class AddTodoFragment : Fragment(R.layout.fragment_add_todo){
             "MEDIUM" -> binding.mediumBtn.isChecked = true
             "HIGH" -> binding.highBtn.isChecked = true
         }
+    }*/
+    private fun setCheckedButton(name: String?) {
+        when(name) {
+            "Work" -> category = Category.Work
+            "Fun" -> category = Category.Fun
+            "Sports" -> category = Category.Sports
+            "Study" -> category = Category.Study
+            "Low" -> priority = Priority.Low
+            "Medium" -> priority = Priority.Medium
+            "High" -> priority = Priority.High
+        }
     }
 
     private fun validateInput(): Boolean {
         todoTitle = binding.title.text.toString()
 
-        return if (todoTitle.isNullOrEmpty() || binding.alarmText.text.equals("Alarm") ||
-                binding.dateText.text.equals("Date")) {
-            binding.root.showSnackBar("Title, Date and Alarm should all be set")
-            false
-        }else true
+        return if (remindMe) {
+            if (todoTitle.isNullOrEmpty() || time == 0L || date == 0L) {
+                binding.root.showSnackBar("Title, Date and Alarm should all be set")
+                false
+            } else true
+        }else {
+            if (todoTitle.isNullOrEmpty() || date == 0L) {
+                binding.root.showSnackBar("Title and Date should all be set")
+                false
+            } else true
+        }
     }
-
-
 
     private fun showTimePicker() {
         val uses24HourFormat = is24HourFormat(requireContext())
@@ -209,36 +239,57 @@ class AddTodoFragment : Fragment(R.layout.fragment_add_todo){
         }
 
         MaterialTimePicker.Builder()
-            .setTimeFormat(timeFormat)
-            .setHour(12)
-            .setMinute(10)
-            .setTitleText("Select time")
-            .build()
-            .apply {
-                show(this@AddTodoFragment.requireActivity().supportFragmentManager, "AddTodo")
-                addOnPositiveButtonClickListener {
-                    time = convertHoursAndMinutesToMillis(this.hour, this.minute)
-                    binding.alarmText.text = onTimeSelected(this.hour, this.minute)
+                .setTimeFormat(timeFormat)
+                .setHour(12)
+                .setMinute(10)
+                .setTitleText("Select time")
+                .build()
+                .apply {
+                    show(this@AddTodoFragment.requireActivity().supportFragmentManager, "AddTodo")
+                    addOnPositiveButtonClickListener {
+                        time = viewModel.convertHoursAndMinutesToMillis(this.hour, this.minute)
+                        binding.alarmText.text = viewModel.onTimeSelected(this.hour, this.minute)
+                    }
                 }
-            }
     }
 
     private fun showDatePicker() {
         MaterialDatePicker.Builder
-            .datePicker()
-            .setTitleText("Select date")
-            .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
-            .build()
-            .apply{
-                show(this@AddTodoFragment.requireActivity().supportFragmentManager, "AddTodo")
-                addOnPositiveButtonClickListener {
-                    date = it
-                    viewModel.onDateSelected(it)
+                .datePicker()
+                .setTitleText("Select date")
+                .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
+                .build()
+                .apply{
+                    show(this@AddTodoFragment.requireActivity().supportFragmentManager, "AddTodo")
+                    addOnPositiveButtonClickListener {
+                        date = it
+                        binding.dateText.text = viewModel.onDateSelected(it)
+                    }
                 }
-            }
     }
 
-    private fun onTimeSelected(hour: Int, minute: Int): String {
+    private fun showAlarmText(remindMe: Boolean) {
+        if (remindMe) {
+            binding.alarmText.visibility = View.VISIBLE
+            binding.alarmImage.visibility = View.VISIBLE
+
+            binding.alarmText.setOnClickListener {
+                showTimePicker()
+            }
+            binding.alarmImage.setOnClickListener {
+                showTimePicker()
+            }
+
+        }else {
+            binding.alarmText.visibility = View.GONE
+            binding.alarmImage.visibility = View.GONE
+        }
+    }
+
+
+
+
+/*private fun onTimeSelected(hour: Int, minute: Int): String {
         val hourAsText = if (hour < 10) "0$hour" else hour
         val minuteAsText = if (minute < 10) "0$minute" else minute
         return "$hourAsText:$minuteAsText"
@@ -248,5 +299,5 @@ class AddTodoFragment : Fragment(R.layout.fragment_add_todo){
         //val minuteInMillis = minute * 60000
         val hoursInMillis = hour * 3600
         return hoursInMillis.toLong()
-    }
+    }*/
 }

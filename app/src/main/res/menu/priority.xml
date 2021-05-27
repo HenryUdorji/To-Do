@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/low_btn"
+        android:title="Low"
+        />
+    <item android:id="@+id/medium_btn"
+        android:title="Medium"
+        />
+    <item android:id="@+id/high_btn"
+        android:title="High"
+        />
+</menu>

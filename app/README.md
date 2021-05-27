@@ -7,10 +7,6 @@
 
 - Prioritization
 
-- Pictures on Tasks
-
-- Voice Capture
-
 - Today List
 
 - Future Task
@@ -19,13 +15,7 @@
 
 - Alarm and Notification
 
-- Widget
-
-- FingerPrint or PassCode protection
-
 - Create and Edit Profile
-
-- Add Task location
 
 
 ## ARCHITECTURE

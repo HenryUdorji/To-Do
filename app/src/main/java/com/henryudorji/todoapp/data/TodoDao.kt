@@ -13,7 +13,7 @@ interface TodoDao {
     @Insert
     suspend fun todoInsert(todo: Todo)
 
-    @Update(onConflict = OnConflictStrategy.REPLACE)
+    @Update
     suspend fun todoUpdate(todo: Todo)
 
     @Delete

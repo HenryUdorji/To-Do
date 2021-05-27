@@ -10,9 +10,9 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "todo")
 data class Todo(
         var title: String? = null,
-        var date: Long? = null,
+        var date: Long = 0L,
         @ColumnInfo(name = "alarm_time")
-        var alarmTime: Long? = null,
+        var alarmTime: Long = 0L,
         @ColumnInfo(name = "remind_me")
         var remindMe: Boolean = false,
         var category: Category = Category.Work,
