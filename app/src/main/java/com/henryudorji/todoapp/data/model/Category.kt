@@ -6,6 +6,5 @@ package com.henryudorji.todoapp.data.model
 enum class Category {
     Work,
     Study,
-    Fun,
-    Sports
+    Fun
 }

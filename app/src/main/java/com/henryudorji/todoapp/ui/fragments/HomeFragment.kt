@@ -21,7 +21,7 @@ import com.henryudorji.todoapp.databinding.ProfilePromptDialogBinding
 import com.henryudorji.todoapp.ui.MainActivity
 import com.henryudorji.todoapp.ui.TodoViewModel
 import com.henryudorji.todoapp.utils.*
-import com.henryudorji.todoapp.utils.Constants.ID
+import com.henryudorji.todoapp.utils.Constants.TODO
 import java.text.SimpleDateFormat
 import java.time.Instant
 import java.time.LocalDateTime
@@ -65,7 +65,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private fun initViews() {
         viewModel.getUserImage()
-        viewModel.userImageData.observe(viewLifecycleOwner, Observer {
+        viewModel.userImageData.observe(viewLifecycleOwner, {
             when(it) {
                 is Resource.Success -> binding.profileImage.loadImage(it.data)
                 is Resource.Error -> {
@@ -103,13 +103,11 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(requireContext())
         }
-        viewModel.getAllTodo().observe(viewLifecycleOwner, Observer {
+        viewModel.getAllTodo().observe(viewLifecycleOwner, {
             homeAdapter.differ.submitList(it)
         })
         homeAdapter.setOnItemClickListener {
-            val bundle = Bundle().apply {
-                putSerializable(ID, it)
-            }
+            val bundle = Bundle().apply { putParcelable(TODO, it) }
             findNavController().navigate(
                     R.id.action_homeFragment_to_addTodoFragment,
                     bundle

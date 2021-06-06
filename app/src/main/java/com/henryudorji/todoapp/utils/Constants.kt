@@ -5,5 +5,5 @@ package com.henryudorji.todoapp.utils
 //
 object Constants {
     const val IMAGE_REQUEST_CODE = 1
-    const val ID = "id"
+    const val TODO = "todo"
 }

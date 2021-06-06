@@ -6,6 +6,8 @@ import android.os.Build
 import androidx.lifecycle.*
 import com.henryudorji.todoapp.base.BaseApplication
 import com.henryudorji.todoapp.data.TodoRepository
+import com.henryudorji.todoapp.data.model.Category
+import com.henryudorji.todoapp.data.model.Priority
 import com.henryudorji.todoapp.data.model.Todo
 import com.henryudorji.todoapp.utils.ImageStorageManager
 import com.henryudorji.todoapp.utils.Resource
@@ -28,16 +30,18 @@ class TodoViewModel(
     private val TAG = "TodoViewModel"
 
     private var _userImageData: MutableLiveData<Resource<Bitmap>> = MutableLiveData()
-    val userImageData: LiveData<Resource<Bitmap>>
-        get() = _userImageData
+    val userImageData: LiveData<Resource<Bitmap>> = _userImageData
 
-    private var _dateSelected: MutableLiveData<Resource<String?>> = MutableLiveData()
-    val dateSelected: LiveData<Resource<String?>>
-        get() = _dateSelected
+    private var _dateSelected: MutableLiveData<String?> = MutableLiveData()
+    val dateSelected: LiveData<String?> = _dateSelected
 
-    private var _millisToHours: MutableLiveData<Resource<String?>> = MutableLiveData()
-    val millisToHours: LiveData<Resource<String?>>
-        get() = _millisToHours
+    private var _millisToHours: MutableLiveData<String?> = MutableLiveData()
+    val millisToHours: LiveData<String?> = _millisToHours
+
+    private var _validateTodoInput: MutableLiveData<Resource<String>> = MutableLiveData()
+    val  validateTodoInput: LiveData<Resource<String>> = _validateTodoInput
+
+
 
     val todoResponse = MutableLiveData<Boolean>()
 
@@ -55,25 +59,26 @@ class TodoViewModel(
     fun getAllTodo() = todoRepository.getAllTodo()
 
 
-    fun onDateSelected(dateTimeInMillis: Long?): String {
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val dateTime = LocalDateTime.ofInstant(Instant.ofEpochMilli(dateTimeInMillis!!), ZoneId.systemDefault())
-            //_dateSelected.postValue(Resource.Success(null, dateString))
-            dateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
-        }else {
-            val dateTime = SimpleDateFormat("yyyy-MM-dd")
-            dateTime.format(Date(dateTimeInMillis!!))
-            //_dateSelected.postValue(Resource.Success(null, dateString))
-        }
+    fun onDateSelected(dateTimeInMillis: Long?) {
+        if (dateTimeInMillis != null) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                val dateTime = LocalDateTime.ofInstant(Instant.ofEpochMilli(dateTimeInMillis), ZoneId.systemDefault())
+                _dateSelected.postValue(dateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")))
+            } else {
+                val dateTime = SimpleDateFormat("yyyy-MM-dd")
+                _dateSelected.postValue(dateTime.format(Date(dateTimeInMillis)))
+            }
+        }else _dateSelected.postValue(null)
     }
 
-    fun convertMillisToHoursAndMinutes(millis: Long): String {
-        val hour = millis / 3600
-        val minute = millis / 60000
-        val hourAsText = if (hour < 10) "0$hour" else hour
-        val minuteAsText = if (minute < 10) "0$minute" else minute
-        return "$hourAsText:$minuteAsText"
-        //_millisToHours.postValue(Resource.Success(null, "$hourAsText:$minuteAsText"))
+    fun convertMillisToHoursAndMinutes(millis: Long?) {
+        if (millis != null) {
+            val hour = millis.div(3600)
+            val minute = millis.div(60000)
+            val hourAsText = if (hour < 10) "0$hour" else hour
+            val minuteAsText = if (minute < 10) "0$minute" else minute
+            _millisToHours.postValue("$hourAsText:$minuteAsText")
+        }else _millisToHours.postValue(null)
     }
 
     fun convertHoursAndMinutesToMillis(hour: Int, minute: Int): Long {
@@ -82,10 +87,10 @@ class TodoViewModel(
         return hoursInMillis.toLong()
     }
 
-    fun onTimeSelected(hour: Int, minute: Int): String {
+    fun onTimeSelected(hour: Int, minute: Int) {
         val hourAsText = if (hour < 10) "0$hour" else hour
         val minuteAsText = if (minute < 10) "0$minute" else minute
-        return "$hourAsText:$minuteAsText"
+        _millisToHours.postValue("$hourAsText:$minuteAsText")
     }
 
     fun saveUserImage(bitmap: Bitmap) {
@@ -103,6 +108,28 @@ class TodoViewModel(
                 _userImageData.postValue(Resource.Error("Click on the image to setup your image!"))
             }else {
                 _userImageData.postValue(Resource.Success(null, bitmap))
+            }
+        }
+    }
+
+    fun validateTodoInput(todoTitle: String, remindMe: Boolean, date: Long, time: Long?,
+                          category: Category, priority: Priority, updateTodo: Todo?) {
+        if (remindMe) {
+            if (todoTitle.isEmpty() || time == 0L || date == 0L) {
+                _validateTodoInput.postValue(Resource.Error("Title, Date and Alarm should all be " +
+                        "set"))
+            } else {
+                if (updateTodo == null) {
+                    insertTodo(Todo(0, todoTitle, date, time!!, remindMe, category, priority))
+                }else updateTodo(Todo(updateTodo.id, todoTitle, date, time!!, remindMe, category, priority))
+            }
+        }else {
+            if (todoTitle.isEmpty() || date == 0L) {
+                _validateTodoInput.postValue(Resource.Error("Title and Date should all be set"))
+            } else {
+                if (updateTodo == null) {
+                    insertTodo(Todo(0, todoTitle, date, 0L, remindMe, category, priority))
+                }else updateTodo(Todo(updateTodo.id, todoTitle, date, 0L, remindMe, category, priority))
             }
         }
     }

@@ -21,8 +21,13 @@
 
     <color name="high_set">#ff5c5c</color>
     <color name="low_set">#236cb7</color>
-    <color name="notify_5_set">#3392F1</color>
     <color name="medium_set">#EF723B</color>
+    <color name="fun_set">#ED4C83</color>
+    <color name="study_set">#673AB7</color>
+    <color name="work_set">#00b986</color>
+
+
+    <color name="notify_5_set">#3392F1</color>
     <color name="notify_7_set">#ED4C83</color>
     <color name="notify_8_set">#00b986</color>
     <color name="notify_9_set">#673AB7</color>

@@ -1,10 +1,14 @@
 package com.henryudorji.todoapp.utils
 
+import android.app.Activity
 import android.content.Context
 import android.graphics.Bitmap
 import android.view.View
 import android.widget.ImageView
+import androidx.annotation.DrawableRes
+import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
+import androidx.core.view.isVisible
 import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
 import com.henryudorji.todoapp.R
@@ -53,3 +57,13 @@ fun ImageView.loadImage(bitmap: Bitmap?) {
             .placeholder(ResourcesCompat.getDrawable(resources, R.drawable.profile, null))
             .into(this)
 }
+
+fun View.show() {
+    this.visibility = View.VISIBLE
+}
+
+fun View.hide() {
+    this.visibility = View.VISIBLE
+}
+
+fun Activity.getDrawable(@DrawableRes id: Int) = ContextCompat.getDrawable(applicationContext, id)

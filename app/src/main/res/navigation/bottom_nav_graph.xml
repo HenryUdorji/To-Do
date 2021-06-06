@@ -23,11 +23,15 @@
         android:label="NotificationFragment" />
     <fragment
         android:id="@+id/addTodoFragment"
-        android:name="com.henryudorji.todoapp.ui.fragments.AddTodoFragment"
+        android:name="com.henryudorji.todoapp.ui.fragments.AddEditTodoFragment"
         android:label="AddTodoFragment" >
+        <action
+            android:id="@+id/action_addTodoFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
         <argument
-            android:name="id"
-            app:argType="integer"
-            android:defaultValue="0" />
+            android:name="todo"
+            app:argType="com.henryudorji.todoapp.data.model.Todo"
+            app:nullable="true"
+            android:defaultValue="@null" />
     </fragment>
 </navigation>
